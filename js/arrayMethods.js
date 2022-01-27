@@ -5,7 +5,11 @@
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function map(array, callback) {
-
+const result = array.reduce((prev, current, index, array) => {
+prev.push(callback(current, index, array));
+return prev;
+}, []);
+return result;
 }
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
@@ -15,7 +19,13 @@ function map(array, callback) {
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function filter(array, callback) {
-
+  const result = array.reduce((prev, current, index, array) => {
+    if (callback(current, index, array)){
+      prev.push(current);
+    }
+    return prev;
+    }, []);
+    return result;
 }
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
@@ -25,7 +35,13 @@ function filter(array, callback) {
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function some(array, callback) {
-
+  const result = array.reduce((prev, current, index, array) => {
+    if (!prev){
+      return callback(current, index, array);
+    }
+    return prev;
+    }, false);
+    return result;
 }
 
 /* Функция принимает в себе первым аргументом массив, вторым функцию которая будет вызываться для каждого элемента массива
@@ -35,7 +51,13 @@ function some(array, callback) {
  Помните, что вы передаете функцию, которая ожидает 3 аргумента, текущий элемент, индекс и сам массив. Автоматическая проверка будет это учитывать.
 */
 function every(array, callback) {
-
+  const result = array.reduce((prev, current, index, array) => {
+    if (prev){
+      return callback(current, index, array);
+    }
+    return prev;
+    }, true);
+    return result;
 }
 
 // Эту часть не удаляем, она важна для проверки результата
